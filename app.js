@@ -1,10 +1,20 @@
 let htp = require('http');//We require http module to create a server in nodejs
-let req = "Srinath";
 htp.createServer((req,res) => {
-    console.log(req);
-    res.write("Welcome Back folks!!:)");
-    res.end(); // or you can write res.end("Welcome back folks")
-}).listen(4000); //http://localhost:4000/
+    const url = req.url;
+    if(url === '/'){
+      res.write('<html>');
+      res.write('<head><title>Enter a message</title><head>');
+    res.write('<body><form action="/message" method="POST"><input type="text" name="mess"><button type="submit">Send</button></form></body>');
+    res.write('</html');
+    return res.end();
+    }
+    res.setHeader('Content-Type','text/html');
+    res.write('<html>');
+    res.write('<body><h1>Welcome</h1></body>');
+    res.write('</html');
+  //  res.write("Welcome Back folks!!:)");
+  //  res.end(); process.exit(); // or you can write res.end("Welcome back folks")
+}).listen(3000); //http://localhost:3000/
 
 
 

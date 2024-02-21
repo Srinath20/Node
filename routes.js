@@ -17,7 +17,7 @@ const requestHandler = (req,res) =>{
         });
         req.on('end',() =>{
           const parsedBody = Buffer.concat(body).toString();
-          const message = parsedBody.split('=')[1];
+          const message = parsedBody.split('=')[0];
           //fs.writeFileSync() methods blocks the code bwlo it from getting executed which might be a problem in reading/copying big files. So we prefer to use fs.writeFile();
           fs.writeFile('names.txt',message,(err) =>{
             res.statusCode = '302';
